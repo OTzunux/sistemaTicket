@@ -81,6 +81,27 @@ public class MainApp extends Application {
             System.err.println("Error al cargar la pantalla de configuración del sistema: " + e.getMessage());
         }
     }
+    
+    // Nuevo método para mostrar la pantalla de gestión de roles y permisos
+    public void showGestionRolesPermisos(User adminUser) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("gestion-roles-permisos-view.fxml"));
+            AnchorPane gestionLayout = loader.load();
+
+            Scene scene = new Scene(gestionLayout);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Sistema de Tickets de Servicio - Gestión de Roles y Permisos");
+
+            GestionRolesPermisosController controller = loader.getController();
+            controller.setMainApp(this);
+            controller.setLoggedInUser(adminUser); // Pasa el usuario administrador
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error al cargar la pantalla de gestión de roles y permisos: " + e.getMessage());
+        }
+    }
 
     // ****** ESTE MÉTODO ES NECESARIO PARA EL FILECHOOSER ******
     public Stage getPrimaryStage() {
